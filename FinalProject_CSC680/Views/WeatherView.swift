@@ -2,10 +2,17 @@ import SwiftUI
 
 struct WeatherView: View {
     var weather: ResponseBody
+    @State var isModal: Bool = false
+
     var body: some View {
         ZStack(alignment: .leading){
             VStack(){
                 VStack(alignment: .leading, spacing: 5){
+                    Button("Go Back") {
+                                self.isModal = true
+                            }.sheet(isPresented: $isModal, content: {
+                                ContentView()
+                            })
                     Text(weather.name)
                         .bold().font(.title)
                     
@@ -48,7 +55,7 @@ struct WeatherView: View {
                     }
                     
                     Spacer()
-
+                    
                 }
                 .frame(maxWidth: .infinity)
             }
